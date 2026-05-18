@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ブリーフセラピー｜就労移行支援スタッフのための図解ガイド</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif; background: #FAFBFC; color: #1E293B; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: #0D9488; text-decoration: none; border-bottom: 1px dashed rgba(13,148,136,0.4); }
+a:hover { border-bottom-style: solid; }
+strong { font-weight: 700; }
+
+/* Scroll animation */
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Hero */
+.hero { background: linear-gradient(160deg, #0F766E 0%, #0D9488 40%, #14B8A6 100%); padding: 56px 24px 48px; position: relative; overflow: hidden; }
+.hero-circle-1 { position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+.hero-circle-2 { position: absolute; bottom: -30px; left: -30px; width: 140px; height: 140px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+.hero-inner { max-width: 640px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-badge { display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border-radius: 24px; padding: 6px 16px; font-size: 12px; color: #CCFBF1; font-weight: 500; margin-bottom: 20px; letter-spacing: 0.5px; }
+.hero h1 { font-size: clamp(28px, 6vw, 40px); font-weight: 800; color: #fff; line-height: 1.3; margin-bottom: 16px; letter-spacing: -0.5px; }
+.hero p { font-size: 15px; color: rgba(255,255,255,0.88); line-height: 1.9; max-width: 520px; }
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+.hero-tag { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 6px 14px; font-size: 13px; color: #fff; font-weight: 500; }
+
+/* Main */
+.main { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+.section-space { padding: 48px 0 32px; }
+.section-space-sm { padding-bottom: 32px; }
+
+/* Section header */
+.sec-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.sec-num { width: 32px; height: 32px; border-radius: 50%; background: #0D9488; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+.sec-title { font-size: 20px; font-weight: 700; color: #0F172A; }
+.sec-subtitle { font-size: 14px; font-weight: 400; color: #64748B; margin-left: 8px; }
+
+/* Card */
+.card { background: #fff; border-radius: 16px; padding: 24px; border: 1px solid #E2E8F0; box-shadow: 0 1px 4px rgba(0,0,0,0.03); }
+.prose { font-size: 14.5px; line-height: 1.9; color: #334155; }
+.prose + .prose { margin-top: 12px; }
+
+/* Callout */
+.callout { border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.callout-orange { background: #FFF7ED; border-left: 4px solid #EA580C; }
+.callout-teal { background: #F0FDFA; border: 1px solid #99F6E4; }
+.callout-slate { background: #F8FAFC; border: 1px dashed #CBD5E1; }
+.callout-label { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.callout-label-orange { color: #C2410C; }
+.callout-label-teal { color: #0D9488; font-size: 13px; margin-bottom: 6px; }
+.callout-text-orange { font-size: 14px; color: #7C2D12; line-height: 1.8; }
+.callout-text-teal { font-size: 14px; color: #115E59; line-height: 1.8; }
+
+/* Grid comparison */
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+.compare-box { border-radius: 12px; padding: 20px; }
+.compare-red { background: #FEF2F2; border: 1px solid #FECACA; }
+.compare-teal { background: #F0FDFA; border: 1px solid #99F6E4; }
+.compare-label { font-size: 12px; font-weight: 700; margin-bottom: 12px; letter-spacing: 0.5px; }
+.compare-label-red { color: #DC2626; }
+.compare-label-teal { color: #0D9488; }
+.compare-item { margin-bottom: 8px; font-size: 14px; line-height: 1.8; }
+.compare-item:last-child { margin-bottom: 0; }
+.text-red-dark { color: #7F1D1D; }
+.text-teal-dark { color: #115E59; }
+
+/* 3 Rules */
+.rule-card { border-radius: 14px; padding: 20px 24px; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 12px; }
+.rule-num { font-size: 22px; font-weight: 800; line-height: 1; min-width: 28px; }
+.rule-title { font-weight: 700; font-size: 15px; color: #1E293B; margin-bottom: 6px; }
+.rule-desc { font-size: 13.5px; color: #475569; line-height: 1.75; }
+.note-text { font-size: 13.5px; color: #64748B; line-height: 1.8; margin-top: 16px; padding: 0 4px; }
+
+/* Tab selector */
+.tab-wrap { display: flex; gap: 4px; background: #F1F5F9; border-radius: 12px; padding: 4px; margin-bottom: 20px; }
+.tab-btn { flex: 1; padding: 12px 16px; border-radius: 10px; border: none; font-weight: 600; font-size: 14px; cursor: pointer; background: transparent; color: #64748B; transition: all 0.2s; font-family: inherit; text-align: center; }
+.tab-btn.active-mri { background: #fff; color: #DC2626; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.tab-btn.active-sfa { background: #fff; color: #0D9488; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.tab-sub { font-size: 11px; font-weight: 400; margin-top: 2px; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.tab-panel { background: #fff; border-radius: 16px; padding: 24px; }
+.tab-mri { border: 1px solid #FECACA; }
+.tab-sfa { border: 1px solid #99F6E4; }
+
+/* Approach header */
+.approach-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.approach-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+.approach-icon-red { background: #FEE2E2; color: #DC2626; }
+.approach-icon-teal { background: #CCFBF1; color: #0D9488; }
+.approach-title { font-weight: 700; font-size: 16px; color: #1E293B; }
+.approach-sub-red { font-size: 12px; color: #DC2626; }
+.approach-sub-teal { font-size: 12px; color: #0D9488; }
+
+/* Cycle viz */
+.cycle-wrap { position: relative; padding: 24px 0; }
+.cycle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 480px; margin: 0 auto; position: relative; }
+.cycle-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2; }
+.cycle-center-red { background: linear-gradient(135deg, #FEE2E2, #FECACA); box-shadow: 0 2px 12px rgba(220,38,38,0.15); }
+.cycle-center-teal { background: linear-gradient(135deg, #CCFBF1, #99F6E4); box-shadow: 0 2px 12px rgba(13,148,136,0.15); }
+.cycle-item { border-radius: 12px; padding: 16px; font-size: 13px; line-height: 1.7; text-align: center; white-space: pre-line; opacity: 0; transform: scale(0.8); transition: all 0.5s ease; }
+.cycle-item.visible { opacity: 1; transform: scale(1); }
+.cycle-item-red { background: #FFF5F5; border: 1px solid #FECACA; color: #991B1B; }
+.cycle-item-teal { background: #F0FDFA; border: 1px solid #99F6E4; color: #115E59; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.spin { animation: spin 3s linear infinite; }
+.cycle-icon { color: inherit; display: flex; }
+
+/* Intervention box */
+.intervention-red { background: #FFF5F5; border-radius: 12px; padding: 16px 20px; margin-top: 16px; border: 1px solid #FECACA; }
+.intervention-teal { background: #F0FDFA; border-radius: 12px; padding: 16px 20px; margin-top: 16px; border: 1px solid #99F6E4; }
+.intervention-label-red { font-size: 13px; font-weight: 600; color: #DC2626; margin-bottom: 8px; }
+.intervention-label-teal { font-size: 13px; font-weight: 600; color: #0D9488; margin-bottom: 8px; }
+.intervention-text-red { font-size: 14px; color: #7F1D1D; line-height: 1.8; }
+.intervention-text-teal { font-size: 14px; color: #115E59; line-height: 1.8; }
+.section-label-red { font-size: 13px; font-weight: 600; color: #991B1B; margin-bottom: 12px; }
+.section-label-teal { font-size: 13px; font-weight: 600; color: #115E59; margin-bottom: 12px; }
+
+/* Resource grid */
+.resource-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.resource-box { border-radius: 12px; padding: 20px; }
+.resource-blue { background: #EFF6FF; border: 1px solid #BFDBFE; }
+.resource-orange { background: #FFF7ED; border: 1px solid #FED7AA; }
+.resource-label { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+.resource-label-blue { color: #2563EB; }
+.resource-label-orange { color: #EA580C; }
+.resource-text-blue { font-size: 13.5px; color: #1E3A5F; line-height: 1.9; }
+.resource-text-orange { font-size: 13.5px; color: #7C2D12; line-height: 1.9; }
+
+/* Expandable card */
+.exp-card { background: #fff; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden; transition: border-color 0.3s, box-shadow 0.3s; cursor: pointer; margin-bottom: 12px; }
+.exp-card.open { box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+.exp-header { padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+.exp-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.exp-title { font-weight: 700; font-size: 16px; color: #1E293B; line-height: 1.4; }
+.exp-subtitle { font-size: 13px; color: #64748B; margin-top: 2px; }
+.exp-chevron { color: #94A3B8; transition: transform 0.3s; display: flex; flex-shrink: 0; }
+.exp-card.open .exp-chevron { transform: rotate(180deg); }
+.exp-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+.exp-card.open .exp-body { max-height: 1200px; }
+.exp-content { padding: 0 24px 24px; border-top: 1px solid #F1F5F9; }
+.exp-content-inner { padding-top: 16px; font-size: 14.5px; line-height: 1.85; color: #334155; }
+.exp-example { border-radius: 8px; padding: 14px; margin-bottom: 12px; }
+.exp-example-label { font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+.exp-note { font-size: 13px; color: #64748B; }
+
+/* SVG icons inline */
+.icon-sm { width: 24px; height: 24px; }
+.icon-xs { width: 20px; height: 20px; }
+
+/* Practice section */
+.practice-box { border-radius: 12px; padding: 20px; margin-bottom: 12px; }
+.practice-box:last-child { margin-bottom: 0; }
+.practice-label { font-weight: 700; font-size: 14px; margin-bottom: 12px; }
+.practice-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+.practice-item:last-child { margin-bottom: 0; }
+.practice-check { flex-shrink: 0; margin-top: 2px; }
+.practice-text { font-size: 13.5px; color: #334155; line-height: 1.7; }
+
+/* Scale bars */
+.scale-row { margin-bottom: 12px; }
+.scale-header { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 13px; }
+.scale-label { color: #475569; font-weight: 500; }
+.scale-value { font-weight: 700; }
+.scale-track { height: 10px; border-radius: 5px; background: #F1F5F9; overflow: hidden; }
+.scale-fill { height: 100%; border-radius: 5px; width: 0; transition: width 1.2s ease; }
+
+/* Warning box */
+.warning-box { background: #FFFBEB; border-radius: 12px; padding: 16px 20px; border: 1px solid #FDE68A; }
+.warning-flex { display: flex; align-items: flex-start; gap: 8px; }
+.warning-icon { color: #D97706; margin-top: 2px; flex-shrink: 0; }
+.warning-title { font-size: 13px; font-weight: 600; color: #92400E; margin-bottom: 4px; }
+.warning-text { font-size: 13px; color: #78350F; line-height: 1.75; }
+
+/* Limitations */
+.limit-item { display: flex; align-items: flex-start; gap: 12px; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid #F1F5F9; }
+.limit-item:last-child { padding-bottom: 0; margin-bottom: 0; border-bottom: none; }
+.limit-icon { width: 28px; height: 28px; border-radius: 8px; background: #FEF2F2; display: flex; align-items: center; justify-content: center; color: #DC2626; flex-shrink: 0; margin-top: 2px; }
+.limit-title { font-weight: 600; font-size: 14px; color: #1E293B; margin-bottom: 4px; }
+.limit-desc { font-size: 13.5px; color: #64748B; line-height: 1.75; }
+
+/* Summary */
+.summary-card { background: linear-gradient(160deg, #0F766E 0%, #0D9488 40%, #14B8A6 100%); border-radius: 16px; padding: 28px 24px; color: #fff; }
+.summary-text { font-size: 15px; line-height: 2; color: rgba(255,255,255,0.92); margin-bottom: 20px; }
+.summary-box { background: rgba(255,255,255,0.12); border-radius: 12px; padding: 16px 20px; backdrop-filter: blur(4px); }
+.summary-box-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+.summary-step { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+.summary-step:last-child { margin-bottom: 0; }
+.summary-step-num { width: 22px; height: 22px; border-radius: 6px; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+.summary-step-text { font-size: 13.5px; line-height: 1.7; }
+
+/* Sources */
+.sources-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.sources-icon { color: #94A3B8; }
+.sources-title { font-size: 16px; font-weight: 700; color: #64748B; }
+.sources-card { background: #fff; border-radius: 16px; padding: 20px 24px; border: 1px solid #E2E8F0; font-size: 13px; line-height: 1.8; color: #475569; }
+.source-item { padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #F1F5F9; }
+.source-item:last-child { padding-bottom: 0; margin-bottom: 0; border-bottom: none; }
+.source-num { color: #94A3B8; margin-right: 8px; }
+
+/* Footer */
+.footer { text-align: center; margin-top: 32px; padding: 16px 20px 56px; font-size: 12px; color: #94A3B8; line-height: 1.6; }
+.footer-credit { margin-top: 16px; font-weight: 500; }
+
+/* Check icon */
+.check-svg { width: 20px; height: 20px; }
+
+/* Color specific border overrides for expandable cards */
+.exp-card[data-color="teal"].open { border-color: #0D9488; box-shadow: 0 4px 24px rgba(13,148,136,0.08); }
+.exp-card[data-color="indigo"].open { border-color: #6366F1; box-shadow: 0 4px 24px rgba(99,102,241,0.08); }
+.exp-card[data-color="amber"].open { border-color: #D97706; box-shadow: 0 4px 24px rgba(217,119,6,0.08); }
+.exp-card[data-color="coral"].open { border-color: #E8634A; box-shadow: 0 4px 24px rgba(232,99,74,0.08); }
+.exp-card[data-color="slate"].open { border-color: #475569; box-shadow: 0 4px 24px rgba(71,85,105,0.08); }
+
+@media (max-width: 480px) {
+  .compare-grid, .resource-grid, .cycle-grid { grid-template-columns: 1fr; }
+  .cycle-center { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="reveal hero">
+  <div class="hero-circle-1"></div>
+  <div class="hero-circle-2"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">就労移行支援スタッフのための図解ガイド</div>
+    <h1>ブリーフセラピー</h1>
+    <p>「原因探し」ではなく「解決づくり」に焦点を当てる心理療法。利用者さんが本来持っている力を引き出し、短期間で前向きな変化を生み出すアプローチです。</p>
+    <div class="hero-tags">
+      <span class="hero-tag">短期・効率的</span>
+      <span class="hero-tag">未来志向</span>
+      <span class="hero-tag">利用者の強みを活かす</span>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ===== DEFINITION ===== -->
+<div class="reveal section-space">
+  <div class="sec-header">
+    <span class="sec-num" style="background:#14B8A6;">?</span>
+    <h2 class="sec-title">ブリーフセラピーとは？</h2>
+  </div>
+  <div class="card">
+    <p class="prose" style="font-size:15.5px;">ブリーフセラピー（Brief Therapy：短期療法）とは、問題の「原因」を深く掘り下げるのではなく、「解決」に焦点を当てて短期間で変化を生み出す心理療法の総称です。</p>
+    <p class="prose">1950年代にアメリカで生まれたこのアプローチは、「人はすでに解決のための力（リソース）を持っている」という人間観を土台としています。支援者は、利用者さんがまだ気づいていない強みや、すでにうまくいっている瞬間を一緒に発見し、それを広げるサポートをします。</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;">
+      <div style="background:#F0FDFA;border-radius:12px;padding:16px 20px;border:1px solid #99F6E4;">
+        <div style="font-size:13px;font-weight:700;color:#0D9488;margin-bottom:8px;">ブリーフセラピーがやること</div>
+        <div style="font-size:13.5px;color:#115E59;line-height:1.8;">
+          <div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:4px;"><span style="color:#0D9488;font-weight:700;">&#10003;</span> うまくいっていることを見つけて広げる</div>
+          <div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:4px;"><span style="color:#0D9488;font-weight:700;">&#10003;</span> 本人が望む未来像を具体化する</div>
+          <div style="display:flex;align-items:flex-start;gap:6px;"><span style="color:#0D9488;font-weight:700;">&#10003;</span> 悪循環のパターンを見つけて断ち切る</div>
+        </div>
+      </div>
+      <div style="background:#FEF2F2;border-radius:12px;padding:16px 20px;border:1px solid #FECACA;">
+        <div style="font-size:13px;font-weight:700;color:#DC2626;margin-bottom:8px;">ブリーフセラピーがやらないこと</div>
+        <div style="font-size:13.5px;color:#7F1D1D;line-height:1.8;">
+          <div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:4px;"><span style="color:#DC2626;font-weight:700;">&#10007;</span> 幼少期の体験を長期的に掘り下げる</div>
+          <div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:4px;"><span style="color:#DC2626;font-weight:700;">&#10007;</span> 問題の原因を個人の性格に帰属させる</div>
+          <div style="display:flex;align-items:flex-start;gap:6px;"><span style="color:#DC2626;font-weight:700;">&#10007;</span> 支援者が「正解」を決めて指導する</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 1. WHY ===== -->
+<div class="reveal section-space">
+  <div class="sec-header">
+    <span class="sec-num">1</span>
+    <h2 class="sec-title">なぜ「ブリーフ」なのか</h2>
+  </div>
+  <div class="card">
+    <div class="callout callout-orange">
+      <div class="callout-label callout-label-orange">従来のアプローチでよくある場面</div>
+      <p class="callout-text-orange">利用者さんが「面接がうまくいかない」と相談に来たとき、つい「なぜうまくいかないのか」を一緒に掘り下げたくなります。幼少期の経験、性格の傾向、過去の失敗…。原因は見えてきても、「で、明日からどうすればいいの？」という問いに答えが出にくいことがあります。</p>
+    </div>
+    <p class="prose">20世紀前半の心理療法は、フロイトの精神分析に代表されるように、問題の原因を個人の内面に求め、数年にわたる長期的な治療が一般的でした。</p>
+    <p class="prose">第二次世界大戦後、大量の帰還兵が心理的支援を必要としたことをきっかけに、より効率的で実用的な治療法への需要が急速に高まりました。この文脈で生まれたのがブリーフセラピー（短期療法）です。</p>
+    <p class="prose">精神科医ミルトン・エリクソン（1901-1980）は、個々のクライエントに合わせた柔軟で創造的な治療を行い、後にブリーフセラピーの源流となりました。彼の影響を受けた研究者たちが、カリフォルニア州パロアルトのMRI（Mental Research Institute）で体系的なアプローチを開発していきます。</p>
+    <div class="callout callout-teal" style="margin-top:20px;">
+      <div class="callout-label callout-label-teal">「ブリーフ」の本当の意味</div>
+      <p class="callout-text-teal">「短く済ませる」ことが目的ではありません。「何が有効か」を徹底的に追求した結果として、短期間で終結に至る――これがブリーフの本質です。一般的に10回前後で終結することが多いとされていますが、6〜20回と幅があります。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 2. PARADIGM SHIFT ===== -->
+<div class="reveal section-space-sm">
+  <div class="sec-header">
+    <span class="sec-num">2</span>
+    <h2 class="sec-title">発想の大転換</h2>
+  </div>
+  <div class="card">
+    <p class="prose" style="margin-bottom:24px;">ブリーフセラピーの最大の特徴は、問題の原因を「個人の内面の病理」に求めない点です。代わりに、人と人との「相互作用」のパターンから問題を理解しようとします。これを「システム論的な見方」と呼びます。</p>
+    <div class="compare-grid">
+      <div class="compare-box compare-red">
+        <div class="compare-label compare-label-red">従来の視点</div>
+        <div class="compare-item text-red-dark">「<strong>なぜ</strong>この問題が起きているの？」</div>
+        <div class="compare-item text-red-dark">原因は個人の内面にある</div>
+        <div class="compare-item text-red-dark">過去の経験を掘り下げる</div>
+        <div class="compare-item text-red-dark">問題を取り除く</div>
+      </div>
+      <div class="compare-box compare-teal">
+        <div class="compare-label compare-label-teal">ブリーフの視点</div>
+        <div class="compare-item text-teal-dark">「<strong>何が</strong>うまくいっている？」</div>
+        <div class="compare-item text-teal-dark">関係性の中にパターンがある</div>
+        <div class="compare-item text-teal-dark">未来の解決像を描く</div>
+        <div class="compare-item text-teal-dark">すでにある力を活かす</div>
+      </div>
+    </div>
+    <div class="callout callout-slate">
+      <p style="font-size:14px;color:#475569;line-height:1.8;"><strong style="color:#334155;">重要な前提：</strong>「問題」と「解決」は必ずしも連動しません。問題の原因がわかっても解決できないことがあるし、原因がわからなくても解決に向かえることがあります。ブリーフセラピーでは、「問題とは別のところに解決がある」と考えます。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 3. THREE RULES ===== -->
+<div class="reveal section-space-sm">
+  <div class="sec-header">
+    <span class="sec-num">3</span>
+    <h2 class="sec-title">3つの基本ルール</h2>
+  </div>
+  <div class="rule-card" style="background:#F0FDFA;border:1px solid #99F6E4;border-left:4px solid #0D9488;">
+    <span class="rule-num" style="color:#0D9488;">1</span>
+    <div><div class="rule-title">うまくいっているなら、変えようとしない</div><div class="rule-desc">利用者さんが自然とできていることや、既に良い方向に向かっている部分があれば、そこに手を加える必要はありません。</div></div>
+  </div>
+  <div class="rule-card" style="background:#EFF6FF;border:1px solid #BFDBFE;border-left:4px solid #2563EB;">
+    <span class="rule-num" style="color:#2563EB;">2</span>
+    <div><div class="rule-title">一度うまくいったなら、もっとそれをする</div><div class="rule-desc">過去にうまくいった経験があるなら、その方法を繰り返し、広げていく。小さな成功の再現こそが変化の起点です。</div></div>
+  </div>
+  <div class="rule-card" style="background:#FFFBEB;border:1px solid #FDE68A;border-left:4px solid #D97706;">
+    <span class="rule-num" style="color:#D97706;">3</span>
+    <div><div class="rule-title">うまくいかないなら、何か違うことをする</div><div class="rule-desc">同じやり方を繰り返しても同じ結果しか得られません。やり方を変える勇気が新しい展開を生みます。</div></div>
+  </div>
+  <p class="note-text">この3つのルールは、一見当たり前に思えるかもしれません。しかし、問題を抱えている方は、この「当たり前」が見えなくなっていることが多いのです。支援者の役割は、この気づきを丁寧に促すことにあります。</p>
+</div>
+
+<!-- ===== 4. TWO WHEELS ===== -->
+<div class="reveal section-space-sm">
+  <div class="sec-header">
+    <span class="sec-num">4</span>
+    <h2 class="sec-title">2つの車輪<span class="sec-subtitle">ダブル・ディスクリプション・モデル</span></h2>
+  </div>
+  <p class="prose" style="margin-bottom:24px;">ブリーフセラピーには、自転車の前輪と後輪のように支え合う2つのアプローチがあります。片方だけでも有効ですが、両方を理解することでより柔軟で効果的な支援が可能になります。</p>
+
+  <div class="tab-wrap">
+    <button class="tab-btn active-mri" id="tab-mri" onclick="switchTab('mri')">
+      <div>悪循環を断つ</div><div class="tab-sub">MRIアプローチ</div>
+    </button>
+    <button class="tab-btn" id="tab-sfa" onclick="switchTab('sfa')">
+      <div>良循環を広げる</div><div class="tab-sub">SFAアプローチ</div>
+    </button>
+  </div>
+
+  <!-- MRI -->
+  <div class="tab-content active" id="panel-mri">
+    <div class="tab-panel tab-mri">
+      <div class="approach-header">
+        <div class="approach-icon approach-icon-red">
+          <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"/></svg>
+        </div>
+        <div><div class="approach-title">MRIアプローチ</div><div class="approach-sub-red">Mental Research Institute由来</div></div>
+      </div>
+      <p class="prose" style="margin-bottom:16px;">問題を維持・悪化させている「悪循環のパターン」を見つけ出し、それを断ち切ることを目指します。ポイントは、「本人が解決しようとしている行動自体」が問題を維持させている場合があるという視点です。これを「偽解決」と呼びます。</p>
+      <div class="section-label-red">就労移行での悪循環の例</div>
+      <div class="cycle-wrap" id="bad-cycle">
+        <div class="cycle-grid">
+          <div class="cycle-center cycle-center-red"><div class="cycle-icon spin" style="color:#DC2626;"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div></div>
+          <div class="cycle-item cycle-item-red">面接が不安で
+準備に過度に時間をかける</div>
+          <div class="cycle-item cycle-item-red">準備に疲れて
+当日パフォーマンスが落ちる</div>
+          <div class="cycle-item cycle-item-red">「やっぱり自分はダメだ」
+と自信をさらに失う</div>
+          <div class="cycle-item cycle-item-red">次の面接がもっと怖くなり
+さらに過度な準備をする</div>
+        </div>
+      </div>
+      <div class="intervention-red">
+        <div class="intervention-label-red">MRIの介入ポイント</div>
+        <p class="intervention-text-red">「過度な準備」という偽解決行動そのものに注目し、「今回はあえて準備を2時間以内に限定して臨んでみませんか」など、いつもと<strong>違うこと</strong>を試すよう促します。悪循環のパターンを壊すことで、新しい展開が生まれる余地をつくります。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SFA -->
+  <div class="tab-content" id="panel-sfa">
+    <div class="tab-panel tab-sfa">
+      <div class="approach-header">
+        <div class="approach-icon approach-icon-teal">
+          <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </div>
+        <div><div class="approach-title">SFA（解決志向アプローチ）</div><div class="approach-sub-teal">Solution Focused Approach</div></div>
+      </div>
+      <p class="prose" style="margin-bottom:16px;">問題そのものにはあまり触れず、「すでにうまくいっていること（例外）」や「本人が望む未来の姿（解決像）」に焦点を当てます。Steve de ShazerとInsoo Kim Bergらが1978年にアメリカ・ミルウォーキーに設立したブリーフ家族療法センター（BFTC）で開発しました。</p>
+      <div class="section-label-teal">就労移行での良循環づくりの例</div>
+      <div class="cycle-wrap" id="good-cycle">
+        <div class="cycle-grid">
+          <div class="cycle-center cycle-center-teal"><div class="cycle-icon spin" style="color:#0D9488;"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div></div>
+          <div class="cycle-item cycle-item-teal">「前回うまくいったこと」
+を一緒に見つける</div>
+          <div class="cycle-item cycle-item-teal">小さな成功体験を
+具体的に言葉にする</div>
+          <div class="cycle-item cycle-item-teal">「自分にもできることがある」
+と自信が芽生える</div>
+          <div class="cycle-item cycle-item-teal">次の行動への
+意欲が自然に湧く</div>
+        </div>
+      </div>
+      <div class="intervention-teal">
+        <div class="intervention-label-teal">SFAの考え方</div>
+        <p class="intervention-text-teal">本人はすでに解決のための力（リソース）を持っていると信じます。支援者の役割は、本人が気づいていない強みや、すでにうまくいっている瞬間を一緒に発見し、それを広げていくサポートをすることです。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 5. RESOURCES ===== -->
+<div class="reveal section-space-sm">
+  <div class="sec-header">
+    <span class="sec-num">5</span>
+    <h2 class="sec-title">リソース（資源）という考え方</h2>
+  </div>
+  <div class="card">
+    <p class="prose" style="margin-bottom:20px;">ブリーフセラピーでは、問題解決のために活用できる「ありとあらゆるもの」をリソース（資源・資質）と呼びます。「ないもの」ではなく「あるもの」に注目する――この視点の転換が、利用者さんの自己効力感を育てる鍵です。</p>
+    <div class="resource-grid">
+      <div class="resource-box resource-blue"><div class="resource-label resource-label-blue">内的リソース</div><div class="resource-text-blue">能力、技術、成功体験、失敗から学んだこと、性格の強み、価値観、モチベーション、知識</div></div>
+      <div class="resource-box resource-orange"><div class="resource-label resource-label-orange">外的リソース</div><div class="resource-text-orange">家族の支え、友人関係、支援機関、就労移行のスタッフ、地域の資源、健康、経済的支援</div></div>
+    </div>
+    <div class="callout callout-slate" style="margin-top:16px;">
+      <p style="font-size:13.5px;color:#475569;line-height:1.8;"><strong style="color:#334155;">就労移行での視点：</strong>「転職回数が多い」ことは、見方を変えれば「何度も就職活動を成功させている行動力と面接力がある」ということ。どこに注目するかで、利用者さんの自己認識は大きく変わります。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 6. TECHNIQUES ===== -->
+<div class="reveal section-space-sm">
+  <div class="sec-header">
+    <span class="sec-num">6</span>
+    <h2 class="sec-title">代表的な技法</h2>
+  </div>
+  <p class="note-text" style="margin-top:0;margin-bottom:24px;">各カードをタップすると詳細が開きます。すべて就労移行支援の場面を想定した具体例を載せています。</p>
+
+  <!-- 例外探し -->
+  <div class="exp-card" data-color="teal" onclick="toggleCard(this)">
+    <div class="exp-header">
+      <div class="exp-icon" style="background:#CCFBF1;color:#0D9488;"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+      <div style="flex:1;min-width:0;"><div class="exp-title">例外探し</div><div class="exp-subtitle">問題が起きていない瞬間を見つける</div></div>
+      <div class="exp-chevron"><svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
+    </div>
+    <div class="exp-body"><div class="exp-content"><div class="exp-content-inner">
+      <p style="margin:0 0 12px;">「いつも面接で緊張する」と語る利用者さんに、「少しでもましだった面接はありませんでしたか？」と問いかけます。完全に問題がなかった時でなくても構いません。</p>
+      <div class="exp-example" style="background:#F0FDFA;border:1px solid #99F6E4;">
+        <div class="exp-example-label" style="color:#0D9488;">使い方の例</div>
+        <p style="margin:0;font-size:13.5px;color:#115E59;">「365日毎日緊張しているわけではないですよね。少しリラックスできた時って、どんな状況でしたか？」→「その時、いつもと何が違っていましたか？」→「そのやり方を次の面接でも試してみませんか？」</p>
+      </div>
+      <p class="exp-note">例外の中には、すでに解決の種が含まれています。それを見つけて育てていくのがSFAの基本です。</p>
+    </div></div></div>
+  </div>
+
+  <!-- ミラクル・クエスチョン -->
+  <div class="exp-card" data-color="indigo" onclick="toggleCard(this)">
+    <div class="exp-header">
+      <div class="exp-icon" style="background:#E0E7FF;color:#6366F1;"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z"/></svg></div>
+      <div style="flex:1;min-width:0;"><div class="exp-title">ミラクル・クエスチョン</div><div class="exp-subtitle">奇跡が起きた翌朝を具体的に想像する</div></div>
+      <div class="exp-chevron"><svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
+    </div>
+    <div class="exp-body"><div class="exp-content"><div class="exp-content-inner">
+      <p style="margin:0 0 12px;">「今夜眠っている間に奇跡が起きて、あなたの悩みがすべて解決していたとします。朝目覚めたとき、どんなことから奇跡が起きたと気づきますか？」と問いかけます。</p>
+      <div class="exp-example" style="background:#F5F3FF;border:1px solid #E0E7FF;">
+        <div class="exp-example-label" style="color:#6366F1;">就労移行での活用</div>
+        <p style="margin:0;font-size:13.5px;color:#312E81;">「奇跡が起きた朝、何時に起きていますか？」「誰と会っていますか？」「どんな気持ちで仕事に向かっていますか？」――五感を使って解決後の姿をありありと描き出すことで、本人が本当に望んでいるゴールが具体的に見えてきます。</p>
+      </div>
+      <p class="exp-note">非現実的に聞こえるかもしれませんが、「理想の状態」を具体化することで、そこに近づくための小さな一歩が見えてきます。ただし唐突に感じる方もいるので、「ちょっと変わった質問をしてもいいですか？」と前置きすると自然です。</p>
+    </div></div></div>
+  </div>
+
+  <!-- スケーリング -->
+  <div class="exp-card" data-color="amber" onclick="toggleCard(this)">
+    <div class="exp-header">
+      <div class="exp-icon" style="background:#FEF3C7;color:#D97706;"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22h18M12 2v20M3 12l4-8 4 8M13 12l4-8 4 8"/></svg></div>
+      <div style="flex:1;min-width:0;"><div class="exp-title">スケーリング・クエスチョン</div><div class="exp-subtitle">0〜10の数値で今の状態を可視化する</div></div>
+      <div class="exp-chevron"><svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
+    </div>
+    <div class="exp-body"><div class="exp-content"><div class="exp-content-inner">
+      <p style="margin:0 0 12px;">「最悪の状態を0、理想の状態を10とすると、今はどのあたりですか？」と尋ねます。曖昧な状態を数値で表現することで、変化を客観的に捉えやすくなります。</p>
+      <div class="exp-example" style="background:#FFFBEB;border:1px solid #FDE68A;">
+        <div class="exp-example-label" style="color:#D97706;">発展的な使い方</div>
+        <p style="margin:0;font-size:13.5px;color:#78350F;">利用者さんが「3くらい」と答えたら、「0ではなく3にいるのは、何ができているからですか？」と聞きます。これにより「できていること」に意識が向きます。さらに「4に上がるために、小さな一歩として何ができそうですか？」と続けます。</p>
+      </div>
+      <p class="exp-note">数値の正確さ自体が目的ではありません。本人が自分の状態を振り返り、「意外とゼロではないんだ」と気づくプロセスに意味があります。</p>
+    </div></div></div>
+  </div>
+
+  <!-- コンプリメント -->
+  <div class="exp-card" data-color="teal" onclick="toggleCard(this)">
+    <div class="exp-header">
+      <div class="exp-icon" style="background:#CCFBF1;color:#0D9488;"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+      <div style="flex:1;min-width:0;"><div class="exp-title">コンプリメント</div><div class="exp-subtitle">根拠に基づいて肯定的に評価する</div></div>
+      <div class="exp-chevron"><svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
+    </div>
+    <div class="exp-body"><div class="exp-content"><div class="exp-content-inner">
+      <p style="margin:0 0 12px;">利用者さんが行っていることや考えたことに対して、肯定的に評価し認めることです。単なる「すごいですね」ではなく、リソースという根拠に基づいて具体的に伝えます。</p>
+      <div class="exp-example" style="background:#F0FDFA;border:1px solid #99F6E4;">
+        <div class="exp-example-label" style="color:#0D9488;">NGとOKの例</div>
+        <div style="font-size:13.5px;color:#115E59;line-height:1.8;">
+          <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;"><span style="color:#DC2626;font-weight:700;flex-shrink:0;">NG：</span><span>「えらいですね」（漠然としている）</span></div>
+          <div style="display:flex;align-items:flex-start;gap:8px;"><span style="color:#0D9488;font-weight:700;flex-shrink:0;">OK：</span><span>「緊張すると言いながらも毎回休まず通所されていますよね。その継続力はすごい強みだと思います」</span></div>
+        </div>
+      </div>
+    </div></div></div>
+  </div>
+
+  <!-- リフレーミング -->
+  <div class="exp-card" data-color="coral" onclick="toggleCard(this)">
+    <div class="exp-header">
+      <div class="exp-icon" style="background:#FFE4DE;color:#E8634A;"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/></svg></div>
+      <div style="flex:1;min-width:0;"><div class="exp-title">リフレーミング</div><div class="exp-subtitle">見方の枠組みを変える</div></div>
+      <div class="exp-chevron"><svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
+    </div>
+    <div class="exp-body"><div class="exp-content"><div class="exp-content-inner">
+      <p style="margin:0 0 12px;">同じ事実に対して、異なる意味づけの枠組み（フレーム）を提示する技法です。問題そのものは変わらなくても、見え方が変わることで次のアクションが変わります。</p>
+      <div class="exp-example" style="background:#FFF5F3;border:1px solid #FFE4DE;">
+        <div class="exp-example-label" style="color:#E8634A;">就労移行での例</div>
+        <div style="font-size:13.5px;color:#7C2D12;line-height:1.8;">
+          <div style="margin-bottom:8px;">「何をやっても続かない」→「いろんなことに挑戦できる好奇心の強さ」</div>
+          <div style="margin-bottom:8px;">「周りの目が気になりすぎる」→「他者への感受性が高く、チームの空気を読む力がある」</div>
+          <div>「転職回数が多い」→「環境変化への適応力と行動力の証」</div>
+        </div>
+      </div>
+    </div></div></div>
+  </div>
+
+  <!-- Do Something Different -->
+  <div class="exp-card" data-color="slate" onclick="toggleCard(this)">
+    <div class="exp-header">
+      <div class="exp-icon" style="background:#E2E8F0;color:#475569;"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0018 8 6 6 0 006 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 018.91 14"/></svg></div>
+      <div style="flex:1;min-width:0;"><div class="exp-title">Do Something Different</div><div class="exp-subtitle">MRIアプローチの核心技法</div></div>
+      <div class="exp-chevron"><svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
+    </div>
+    <div class="exp-body"><div class="exp-content"><div class="exp-content-inner">
+      <p style="margin:0 0 12px;">悪循環のパターンが見えたとき、「いつもと何か違うこと」を試すよう促します。大きな変化である必要はなく、ほんの小さな違いで構いません。</p>
+      <div class="exp-example" style="background:#F8FAFC;border:1px solid #E2E8F0;">
+        <div class="exp-example-label" style="color:#475569;">介入のコツ</div>
+        <p style="margin:0;font-size:13.5px;color:#334155;line-height:1.8;">いきなり「違うことをしましょう」と言っても抵抗が生まれます。まず「ブリッジ」として今までの努力を十分に認めた上で、「一つだけ実験的に変えてみるとしたら、何が変えられそうですか？」と、本人の主体性を尊重した形で提案します。</p>
+      </div>
+    </div></div></div>
+  </div>
+</div>
+
+<!-- ===== 7. PRACTICE ===== -->
+<div class="reveal section-space-sm">
+  <div class="sec-header">
+    <span class="sec-num">7</span>
+    <h2 class="sec-title">就労移行支援での活かし方</h2>
+  </div>
+  <div class="card">
+    <p class="prose" style="margin-bottom:20px;">ブリーフセラピーは「セラピスト」だけのものではありません。その考え方と技法は、就労移行支援の日常的な面談や声かけの中で活用できます。以下は、支援場面ごとの具体的な活用ポイントです。</p>
+
+    <div class="practice-box" style="background:#F0FDFA;border-left:4px solid #0D9488;">
+      <div class="practice-label" style="color:#0D9488;">面談場面</div>
+      <div class="practice-item"><svg class="check-svg practice-check" style="color:#0D9488;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span class="practice-text">「この1週間で少しでもうまくいったことはありますか？」と例外から始める</span></div>
+      <div class="practice-item"><svg class="check-svg practice-check" style="color:#0D9488;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span class="practice-text">「10点満点で今の就活への気持ちは何点ですか？」でスケーリング</span></div>
+      <div class="practice-item"><svg class="check-svg practice-check" style="color:#0D9488;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span class="practice-text">通所を続けていること自体をコンプリメントする</span></div>
+    </div>
+    <div class="practice-box" style="background:#EFF6FF;border-left:4px solid #2563EB;">
+      <div class="practice-label" style="color:#2563EB;">就活支援</div>
+      <div class="practice-item"><svg class="check-svg practice-check" style="color:#2563EB;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span class="practice-text">履歴書の「弱み」をリフレーミングで「強み」の裏面として再発見</span></div>
+      <div class="practice-item"><svg class="check-svg practice-check" style="color:#2563EB;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span class="practice-text">面接練習では「前回よりよくなった点」を具体的にフィードバック</span></div>
+      <div class="practice-item"><svg class="check-svg practice-check" style="color:#2563EB;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span class="practice-text">不採用が続いたときは悪循環パターンを見立て、アプローチの変更を提案</span></div>
+    </div>
+    <div class="practice-box" style="background:#FFFBEB;border-left:4px solid #D97706;margin-bottom:0;">
+      <div class="practice-label" style="color:#D97706;">日常の声かけ</div>
+      <div class="practice-item"><svg class="check-svg practice-check" style="color:#D97706;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span class="practice-text">「どうしたらいいと思いますか？」と本人の解決力を信頼する質問</span></div>
+      <div class="practice-item"><svg class="check-svg practice-check" style="color:#D97706;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span class="practice-text">「それができたのはどうやって？」と成功の責任を追及する</span></div>
+      <div class="practice-item"><svg class="check-svg practice-check" style="color:#D97706;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span class="practice-text">「今日一つだけ違うことを試すとしたら？」で小さな行動変容を促す</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 7b. CASE SCENARIO ===== -->
+<div class="reveal section-space-sm">
+  <div style="background:#fff;border-radius:16px;padding:24px;border:1px solid #E2E8F0;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+      <div style="width:36px;height:36px;border-radius:10px;background:#EFF6FF;display:flex;align-items:center;justify-content:center;color:#2563EB;flex-shrink:0;">
+        <svg style="width:20px;height:20px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div style="font-weight:700;font-size:16px;color:#1E293B;">ケースで考える：「早く就職したい」利用者さんへの関わり</div>
+    </div>
+
+    <p class="prose" style="margin-bottom:16px;">就労移行には「一日でも早く就職したい」という強い意欲を持つ利用者さんが少なくありません。ブリーフセラピーの視点は、この場面でどう活きるでしょうか。</p>
+
+    <!-- 親和性 -->
+    <div style="background:#F0FDFA;border-radius:12px;padding:20px;border:1px solid #99F6E4;margin-bottom:12px;">
+      <div style="font-size:13px;font-weight:700;color:#0D9488;margin-bottom:10px;">SFAの視点 ― 意欲をそのまま活かす</div>
+      <p style="font-size:14px;color:#115E59;line-height:1.8;margin:0;">「働きたい」という希望は、それ自体が大きなリソースです。ミラクル・クエスチョンで「どんな職場でどう働いていたいか」を具体的に描いたり、スケーリングで就活への準備度を可視化したりすることで、前に進むエネルギーを支援に活かせます。</p>
+    </div>
+
+    <!-- 注意点 -->
+    <div style="background:#FEF2F2;border-radius:12px;padding:20px;border:1px solid #FECACA;margin-bottom:12px;">
+      <div style="font-size:13px;font-weight:700;color:#DC2626;margin-bottom:10px;">MRIの視点 ― 「焦り」が悪循環になっていないか</div>
+      <p style="font-size:14px;color:#7F1D1D;line-height:1.8;margin:0 0 12px;">一方、MRIの目で見ると、「早く就職したい」→ 焦って合わない職場に就く → 短期離職 → 自信を失う → さらに焦る、という悪循環が起きていることがあります。この場合、「早く就職する」という行動自体がまさに<strong>偽解決</strong>になっている可能性があります。</p>
+      <!-- mini cycle -->
+      <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:4px;text-align:center;font-size:12px;color:#991B1B;padding:8px 0;">
+        <div style="background:#FFF5F5;border:1px solid #FECACA;border-radius:8px;padding:10px 6px;">焦って<br>応募</div>
+        <div>→</div>
+        <div style="background:#FFF5F5;border:1px solid #FECACA;border-radius:8px;padding:10px 6px;">ミスマッチで<br>短期離職</div>
+        <div>→</div>
+        <div style="background:#FFF5F5;border:1px solid #FECACA;border-radius:8px;padding:10px 6px;">自信低下で<br>さらに焦る</div>
+      </div>
+    </div>
+
+    <!-- 統合 -->
+    <div style="background:#F8FAFC;border-radius:12px;padding:20px;border:1px dashed #CBD5E1;">
+      <div style="font-size:13px;font-weight:700;color:#334155;margin-bottom:10px;">両方の視点を統合すると</div>
+      <p style="font-size:14px;color:#475569;line-height:1.85;margin:0;">「早く就職したい」という<strong>希望そのものは尊重</strong>しつつ、その「早く」が本人にとって有効に機能しているかを3つのルールに照らして一緒に確かめます。うまくいっていないなら、「条件を絞ってみる」「まず短期トライアルから試す」など、本人の意欲を別の形で活かす道を対話の中で探ります。意欲を否定するのではなく、<strong>「その意欲をどう使うと一番うまくいきそうか」</strong>を本人と一緒に考えるのがブリーフの姿勢です。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 8. EVIDENCE ===== -->
+<div class="reveal section-space-sm">
+  <div class="sec-header">
+    <span class="sec-num">8</span>
+    <h2 class="sec-title">エビデンス（効果の根拠）</h2>
+  </div>
+  <div class="card">
+    <p class="prose" style="margin-bottom:20px;">ブリーフセラピー（特にSFA）の効果は、複数のメタ分析で検証されています。以下は、異なるメタ分析から報告されている領域別の効果量（Effect Size）です。一般に、ES 0.2が小さい効果、0.5が中程度、0.8以上が大きい効果とされています。数値はそれぞれ異なるメタ分析に由来するため、単純な横比較には注意が必要です。</p>
+
+    <div style="background:#F8FAFC;border-radius:12px;padding:20px;border:1px solid #E2E8F0;margin-bottom:20px;" id="scale-bars">
+      <div style="font-size:13px;font-weight:600;color:#475569;margin-bottom:16px;">解決志向ブリーフセラピーの効果量（複数のメタ分析より）</div>
+      <div class="scale-row"><div class="scale-header"><span class="scale-label">学業成績</span><span class="scale-value" style="color:#0D9488;">ES = 1.57</span></div><div class="scale-track"><div class="scale-fill" data-width="98" style="background:linear-gradient(90deg,rgba(13,148,136,0.5),#0D9488);"></div></div></div>
+      <div class="scale-row"><div class="scale-header"><span class="scale-label">うつ症状</span><span class="scale-value" style="color:#2563EB;">ES = 0.65</span></div><div class="scale-track"><div class="scale-fill" data-width="41" style="background:linear-gradient(90deg,rgba(37,99,235,0.5),#2563EB);"></div></div></div>
+      <div class="scale-row"><div class="scale-header"><span class="scale-label">家族関係</span><span class="scale-value" style="color:#7C3AED;">ES = 0.62</span></div><div class="scale-track"><div class="scale-fill" data-width="39" style="background:linear-gradient(90deg,rgba(124,58,237,0.5),#7C3AED);"></div></div></div>
+      <div class="scale-row"><div class="scale-header"><span class="scale-label">行動・健康機能</span><span class="scale-value" style="color:#D97706;">ES = 0.57</span></div><div class="scale-track"><div class="scale-fill" data-width="36" style="background:linear-gradient(90deg,rgba(217,119,6,0.5),#D97706);"></div></div></div>
+      <div class="scale-row"><div class="scale-header"><span class="scale-label">不安症状</span><span class="scale-value" style="color:#DC2626;">ES = 0.52</span></div><div class="scale-track"><div class="scale-fill" data-width="33" style="background:linear-gradient(90deg,rgba(220,38,38,0.5),#DC2626);"></div></div></div>
+      <div class="scale-row"><div class="scale-header"><span class="scale-label">心理社会的適応</span><span class="scale-value" style="color:#EA580C;">ES = 0.41</span></div><div class="scale-track"><div class="scale-fill" data-width="26" style="background:linear-gradient(90deg,rgba(234,88,12,0.5),#EA580C);"></div></div></div>
+      <div class="scale-row" style="margin-bottom:0;"><div class="scale-header"><span class="scale-label">健康・幸福感</span><span class="scale-value" style="color:#64748B;">ES = 0.39</span></div><div class="scale-track"><div class="scale-fill" data-width="24" style="background:linear-gradient(90deg,rgba(100,116,139,0.5),#64748B);"></div></div></div>
+    </div>
+
+    <div class="warning-box">
+      <div class="warning-flex">
+        <div class="warning-icon"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg></div>
+        <div><div class="warning-title">数値の読み方に注意</div><p class="warning-text">メタ分析ごとに含まれる研究や効果量の定義が異なるため、上記の数値は目安として捉えてください。また、効果量は「他の介入をしなかった場合との比較」であり、「他の心理療法との比較」ではない研究が含まれている点にも注意が必要です。</p></div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:#94A3B8;margin-top:12px;line-height:1.7;">参考文献: 各数値はKim (2008), Gonzalez Suitt et al. (2016)等の個別メタ分析に由来。Żak AM, Pękala K.(2024)のアンブレラレビューで統合的にレビュー。Psychother Res, 35(7), 1043-1055.</p>
+  </div>
+</div>
+
+<!-- ===== 9. LIMITATIONS ===== -->
+<div class="reveal section-space-sm">
+  <div class="sec-header">
+    <span class="sec-num">9</span>
+    <h2 class="sec-title">限界と注意点</h2>
+  </div>
+  <div class="card">
+    <p class="prose" style="margin-bottom:20px;">ブリーフセラピーは万能ではありません。その適用範囲と限界を正しく理解しておくことが、倫理的かつ効果的な支援の前提です。</p>
+
+    <div class="limit-item">
+      <div class="limit-icon"><svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg></div>
+      <div><div class="limit-title">深い内省を必要とする課題には不向きな場合がある</div><div class="limit-desc">SFAは行動変容に力点を置くため、自己探索や過去の整理を必要とするケースでは、他のアプローチとの併用が適切です。</div></div>
+    </div>
+    <div class="limit-item">
+      <div class="limit-icon"><svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg></div>
+      <div><div class="limit-title">重度の精神疾患の急性期には適さない</div><div class="limit-desc">統合失調症の急性期や重度のうつ病など、まず医療的な安定化が必要な場合は、ブリーフセラピー単独ではなく、医療チームとの連携が不可欠です。</div></div>
+    </div>
+    <div class="limit-item">
+      <div class="limit-icon"><svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg></div>
+      <div><div class="limit-title">「短期」であることへの誤解に注意</div><div class="limit-desc">「手短に済ませる」ことが目的ではないにもかかわらず、表面的な理解で安易に適用すると、利用者さんの苦しみを矮小化するリスクがあります。</div></div>
+    </div>
+    <div class="limit-item">
+      <div class="limit-icon"><svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg></div>
+      <div><div class="limit-title">技法だけの模倣では効果が限定的</div><div class="limit-desc">ミラクル・クエスチョンなどの質問技法は、その背景にあるシステム論的な人間理解と一体です。テクニックだけを切り離して使っても十分な効果は得られません。</div></div>
+    </div>
+    <div class="limit-item">
+      <div class="limit-icon"><svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg></div>
+      <div><div class="limit-title">支援者の価値観の押しつけに注意</div><div class="limit-desc">「解決」を急ぐあまり、支援者が考える「正解」に利用者さんを誘導してしまうリスクがあります。あくまで本人の解決像を尊重することが大前提です。</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 10. SUMMARY ===== -->
+<div class="reveal section-space-sm">
+  <div class="sec-header">
+    <span class="sec-num">10</span>
+    <h2 class="sec-title">まとめ</h2>
+  </div>
+  <div class="summary-card">
+    <p class="summary-text">ブリーフセラピーは、「問題の原因を個人の内面に求めない」「解決はすでに始まっている」という視点の転換から出発します。利用者さんのリソースを信頼し、小さな変化を積み重ねていくこのアプローチは、就労移行支援の日々の関わりの中で活かせる実践的な知恵です。</p>
+    <div class="summary-box">
+      <div class="summary-box-title">明日から試せる3つのこと</div>
+      <div class="summary-step"><div class="summary-step-num">1</div><span class="summary-step-text">面談の最初に「最近少しでもうまくいったことは？」と聞いてみる</span></div>
+      <div class="summary-step"><div class="summary-step-num">2</div><span class="summary-step-text">利用者さんの行動を、リソースの根拠つきで具体的に認める</span></div>
+      <div class="summary-step"><div class="summary-step-num">3</div><span class="summary-step-text">行き詰まったとき「いつもと何か違うことを一つだけ試しませんか？」と提案する</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SOURCES ===== -->
+<div class="reveal section-space-sm">
+  <div class="sources-header">
+    <div class="sources-icon"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+    <h2 class="sources-title">情報ソース・参考文献</h2>
+  </div>
+  <div class="sources-card">
+    <div class="source-item"><span class="source-num">[1]</span><a href="https://brieftherapy-ifbt.com/about/brieftherapy/" target="_blank" rel="noopener">国際ブリーフセラピー協会</a></div>
+    <div class="source-item"><span class="source-num">[2]</span><a href="https://brieftherapy-japan.com/about/brieftherapy/" target="_blank" rel="noopener">日本ブリーフセラピー協会</a></div>
+    <div class="source-item"><span class="source-num">[3]</span><a href="http://www.jsccp.jp/near/interview14.php" target="_blank" rel="noopener">日本臨床心理士会 ― 解決志向アプローチ</a></div>
+    <div class="source-item"><span class="source-num">[4]</span><a href="https://s-office-k.com/technique/brief-therapy" target="_blank" rel="noopener">心理オフィスK ― ブリーフセラピー解説</a></div>
+    <div class="source-item"><span class="source-num">[5]</span><a href="https://www.direct-commu.com/shinri/short/short1/" target="_blank" rel="noopener">ダイコミュ心理療法 ― ブリーフセラピーのエビデンス</a></div>
+    <div class="source-item"><span class="source-num">[6]</span><a href="https://doi.org/10.1080/10503307.2024.2406540" target="_blank" rel="noopener">Żak & Pękala (2024) SFBTのアンブレラレビュー. Psychotherapy Research.</a></div>
+    <div class="source-item"><span class="source-num">[7]</span>松尾 (2020) 精神分析的ブリーフセラピーの歴史・理論・実際. 立正大学社会福祉研究所年報, 22, 1-26.</div>
+    <div class="source-item" style="border-bottom:none;padding-bottom:0;margin-bottom:0;"><span class="source-num">[8]</span>日本ブリーフサイコセラピー学会（編）ブリーフセラピー入門. 遠見書房.</div>
+  </div>
+
+  <div class="footer">
+    この図解は、就労移行支援スタッフがブリーフセラピーの基本的な考え方と技法を理解するための教育資料として作成されました。実際の臨床実践にあたっては、専門的なトレーニングや継続的なスーパービジョンが推奨されます。
+    <div class="footer-credit">岡村雄一郎</div>
+  </div>
+</div>
+
+</div><!-- .main -->
+
+<script>
+// Tab switching
+function switchTab(tab) {
+  document.getElementById('panel-mri').classList.toggle('active', tab === 'mri');
+  document.getElementById('panel-sfa').classList.toggle('active', tab === 'sfa');
+  const mriBtn = document.getElementById('tab-mri');
+  const sfaBtn = document.getElementById('tab-sfa');
+  mriBtn.className = 'tab-btn' + (tab === 'mri' ? ' active-mri' : '');
+  sfaBtn.className = 'tab-btn' + (tab === 'sfa' ? ' active-sfa' : '');
+}
+
+// Expandable cards
+function toggleCard(el) {
+  el.classList.toggle('open');
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // Animate cycle items inside
+      const items = e.target.querySelectorAll('.cycle-item');
+      items.forEach((item, i) => {
+        setTimeout(() => item.classList.add('visible'), i * 150);
+      });
+      // Animate scale bars
+      const fills = e.target.querySelectorAll('.scale-fill');
+      fills.forEach(f => { f.style.width = f.dataset.width + '%'; });
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
